@@ -1,0 +1,25 @@
+<% if session[:user] %>
+  <form action="/logout" method="post">
+    <input type="hidden" name="_method" value="DELETE">
+    <input type="submit" value="ログアウト">
+  </form>
+<% end %>
+
+<form action="/posts" method="post" enctype="multipart/form-data">  <input type="hidden" name="name" value="<%= session[:user]["name"] %>">
+  <input type="hidden" name="name" value="<%= session[:user]["name"] %>">
+
+  <div>
+    <label for="content">投稿内容: </label>
+    <textarea name="content" cols=50 rows=10></textarea>
+  </div>
+
+　<input type="file" name="img">
+
+  <input type="submit" value="投稿">
+</form>
+
+<% @posts.each do |post| %>
+  <h2><%= post['name'] %></h2>
+  <p><%= post['content'] %></p>
+  <img src="/images/<%= post['image_path'] %>" alt="">
+<% end %>

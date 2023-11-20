@@ -1,0 +1,8 @@
+<h2>掲示板一覧</h2>
+# aタグを追加
+<a href="/boards/new">掲示板の新規作成</a>
+<ul>
+    <% @boards.each do |board| %>
+        <li><a href="/boards/<%= board['id'] %>"> <%= board['name'] %></a></li>
+    <% end %>
+</ul>
