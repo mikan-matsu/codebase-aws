@@ -1,11 +1,29 @@
-<form action="/login" method="post">
-  <div>
-    <label for="email">メールアドレス: </label>
-    <input type="email" name="email">
-  </div>
-  <div>
-    <label for="password">パスワード: </label>
-    <input type="password" name="password">
-  </div>
-  <input type="submit" value="ログイン">
-</form>
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <link rel="stylesheet" type="text/css" href="/css/styles.css">
+</head>
+
+<div class="layout-center">
+
+  <form action="/login" method="post">
+
+    <div class="text-form">
+      <label for="email">メールアドレス:</label>
+      <input type="email" name="email">
+    </div>
+
+    <div class="text-form">
+      <label for="password">パスワード　:　 </label>
+      <input type="password" name="password">
+    </div>
+
+    <div class="layout-button">
+      <input type="submit" value="ログイン">
+    </div>
+  </form>
+  <div class="login-link">
+      <p>まだアカウントをお持ちでない場合はこちら→<a href="/signup">新規登録</a></p>
+    </div>
+
+</div>

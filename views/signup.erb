@@ -1,15 +1,38 @@
-<form action="/signup" method="post">
-  <div>
-    <label for="name">名前: </label>
-    <input type="text" name="name">
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <link rel="stylesheet" type="text/css" href="/css/styles.css">
+</head>
+
+<div class="layout-center">
+  <div class="new-text">
+    <h2>新規登録</h2>
   </div>
-  <div>
-    <label for="email">メールアドレス: </label>
-    <input type="email" name="email">
-  </div>
-  <div>
-    <label for="password">パスワード: </label>
-    <input type="password" name="password">
-  </div>
-  <input type="submit" value="サインアップ">
-</form>
+  <form action="/signup" method="post">
+    <div>
+      <label for="name">お　名　前　　:</label>
+      <input type="text" name="name">
+    </div>
+    <div>
+      <label for="email">メールアドレス: </label>
+      <input type="email" name="email">
+    </div>
+    <div>
+      <label for="password">パスワード　　:</label>
+      <input type="password" name="password">
+    </div>
+
+    <div class="layout-button">
+      <input type="submit" value="登　録">
+    </div>
+
+    <div class="error">
+      <% if locals[:message] %>
+      <p><%= locals[:message] %></p>
+      <% end %>
+    </div>
+  </form>
+    <div class="login-link">
+      <p>すでにアカウントをお持ちの場合はこちら→<a href="/login">ログイン</a></p>
+    </div>
+</div>

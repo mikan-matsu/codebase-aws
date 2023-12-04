@@ -1,34 +1,79 @@
-<% if session[:user] %>
-  <form action="/logout" method="post">
-    <input type="hidden" name="_method" value="DELETE">
-    <input type="submit" value="ログアウト">
-  </form>
-<% end %>
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <link rel="stylesheet" type="text/css" href="/css/styles.css">
+</head>
 
-<h1><%= @board['name'] %></h1>
-
-<form action="/boards/<%= @board['id'] %>/posts" method="post" enctype="multipart/form-data">
-  <% if session[:user].nil? %>
-    <div>
-      <label for="name">名前: </label>
-      <input type="text" name="name">
-    </div>
-  <% else %>
-    <input type="hidden" name="name" value="<%= session[:user]["name"] %>">
+<div class="posts-all">
+  <div class="posts-form">
+  <% if session[:user] %>
+    <p class="login-name">ようこそ！<%= session[:user]["name"] %>さん</p>
   <% end %>
 
-  <div>
-    <label for="content">投稿内容: </label>
-    <textarea name="content" cols=50 rows=10></textarea>
+    <div class="potsts-textarea">
+      <div class="pots-title">
+        <div class="a-title">
+          <h4><a>掲示板タイトル:</a><%= @board['name'] %></h4>
+        </div>
+      </div>
+
+      <form action="/boards/<%= @board['id'] %>/posts" method="post" enctype="multipart/form-data">
+        <% if session[:user].nil? %>
+
+        <div>
+          <label for="name">名前: </label>
+          <input type="text" name="name">
+        </div>
+          
+        <% else %>
+          <input type="hidden" name="name" value="<%= session[:user]["name"] %>">
+        <% end %>
+
+        <label for="content"> </label>
+        <textarea name="content" cols=43 rows=3></textarea>
+      
+          <input type="file" name="img" id="img">
+          <input type="submit" value="投稿">
+
+      </form>
+    </div>
+
+    <div class="back-to-list">
+      <a href="/boards">掲示板一覧へ戻る</a>
+    </div>
+
+    <div class="logout-button">
+      <% if session[:user] %>
+        <form action="/logout" method="post">
+          <input type="hidden" name="_method" value="DELETE">
+          <input type="submit" value="ログアウト">
+        </form>
+      <% end %>
+    </div>
+
   </div>
 
-  <input type="file" name="img">
+  <div class="posts-content">
+    <% @posts.each do |post| %>
+      <div class="post-details">
+        <div class="details-top">
+          <h2 class="post-name"><%= post['name'] %><a class="a-text">さんの投稿です</a></h2>
+          <p class="post-time">投稿日時: <%= Time.parse(post['created_at']).strftime('%Y-%m-%d %H:%M') %></p>
+        </div>
+        <p><%= post['content'] %></p>
+        <div class="post-details-img">
+          <img src="/images/<%= post['image_path']%>">
+        </div>
 
-  <input type="submit" value="投稿">
-</form>
-
-<% @posts.each do |post| %>
-  <h2><%= post['name'] %></h1>
-  <p><%= post['content'] %></p>
-  <img src="/images/<%= post['image_path']%>">
-<% end %>
+        <div class="delete-button">
+          <% if session[:user] && session[:user]["name"] == post['name'] %>
+            <form action="/boards/<%= @board['id'] %>/posts/<%= post['id'] %>" method="post">
+              <input type="hidden" name="_method" value="DELETE">
+              <input type="submit" value="この投稿を削除する">
+            </form>
+          <% end %>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>

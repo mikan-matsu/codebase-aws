@@ -7,10 +7,18 @@
     <link rel="stylesheet" href="/css/bootstrap-grid.min.css">
     <link rel="stylesheet" href="/css/bootstrap-reboot.min.css">
     <link rel="stylesheet" href="/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Dela+Gothic+One&family=Zen+Kurenaido&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Your+Font+Name&display=swap">
   </head>
-  <body>
-    <h1>akimatsu掲示板へようこそ！</h1>
-    <%= yield %>
+  <div class="layout-top">
+    <h1>akimatsu掲示板</h1>
+  </div>
+
+    <body class="layout-all">
+      <%= yield %>
+    </body>
+    
     <script
       src="https://code.jquery.com/jquery-3.4.1.min.js"
       integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
@@ -19,7 +27,7 @@
     <script src='/js/bootstrap.bundle.min.js'></script>
     <script src='/js/bootstrap.min.js'></script>
     <script src="/js/custom.js"></script>
-  </body>
+  
 
 </html>
 

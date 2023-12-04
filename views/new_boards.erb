@@ -1,10 +1,26 @@
-<h1>掲示板の作成</h1>
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <link rel="stylesheet" type="text/css" href="/css/styles.css">
+</head>
 
-<form action="/boards" method="post">
-  <div>
-    <label for="name">掲示板名: </label>
-    <input type="text" name="name">
+<div class="layout-newcreate">
+  <div class="new-text">
+    <h3>新しい掲示板を作成する</h3>
   </div>
 
-  <input type="submit" value="作成">
-</form>
+  <form action="/boards" method="post">
+    <div class="text-form">
+      <label for="name">掲示板タイトル: </label>
+      <input type="text" name="name">
+      <% if locals[:error_message] %>
+        <p class="error"><%= locals[:error_message] %></p>
+      <% end %>
+    </div>
+
+    <div class="create-button">
+      <input type="submit" value="作成">
+    </div>
+
+  </form>
+</div>

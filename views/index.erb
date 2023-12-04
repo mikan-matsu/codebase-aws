@@ -1,8 +1,42 @@
-<h2>掲示板一覧</h2>
-# aタグを追加
-<a href="/boards/new">掲示板の新規作成</a>
-<ul>
-    <% @boards.each do |board| %>
-        <li><a href="/boards/<%= board['id'] %>"> <%= board['name'] %></a></li>
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <link rel="stylesheet" type="text/css" href="/css/styles.css">
+</head>
+
+
+<div class="layout-list">
+
+    <% if session[:user] %>
+      <div class="welcome-message">
+        <p>ようこそ、<%= session[:user]["name"] %>さん</p>
+      </div>
     <% end %>
-</ul>
+
+    <h1>掲示板一覧</h1>
+    <a href="/boards/new">掲示板の新規作成</a>
+    <ul class="board-list">
+        <% @boards.each do |board| %>
+            <li class="board-item">
+                <div>
+                    <!-- 掲示板の名前表示 -->
+                    <a href="/boards/<%= board['id'] %>"> <%= board['name'] %></a>
+
+                    <!-- 作成者の名前表示 -->
+                    <% if board['user_name'] %>
+                        <p class="board-creator">作成者: <%= board['user_name'] %> </p>
+                    <% end %>
+                </div>
+                
+                 <!-- 削除ボタン -->
+                <% if session[:user] && session[:user]['id'] == board['user_id'] %>
+                    <form action="/boards/<%= board['id'] %>" method="post" class="delete-button-form2">
+                        <input type="hidden" name="_method" value="DELETE">
+                        <input type="hidden" name="user_id" value="<%= session[:user]['id'] %>">
+                        <button type="submit" class="delete-button2">削除</button>
+                    </form>
+                <% end %>
+            </li>
+        <% end %>
+    </ul>
+</div>
