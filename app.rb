@@ -171,7 +171,7 @@ post '/boards/:id/posts' do
   image_path = ''
   if !params[:img].nil?
     tempfile = params[:img][:tempfile] 
-    save_to = "./public/images/#{params[:q][:filename]}"
+    save_to = "./public/images/#{params[:img][:filename]}" 
     FileUtils.mv(tempfile, save_to)
     image_path = params[:img][:filename]
   end
